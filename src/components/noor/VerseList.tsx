@@ -111,6 +111,7 @@ export function VerseList({
       const id = window.setTimeout(() => delete el.dataset["flash"], 2200);
       return () => window.clearTimeout(id);
     }
+    return undefined;
   }, [ready, focusAyah]);
 
   // Remember the topmost visible ayah as "last read"

@@ -14,6 +14,7 @@ import { Route as BookmarksRouteImport } from './routes/bookmarks'
 import { Route as DailyRouteImport } from './routes/daily'
 import { Route as QuranRouteImport } from './routes/quran'
 import { Route as SearchRouteImport } from './routes/search'
+import { Route as SettingsRouteImport } from './routes/settings'
 import { Route as JuzIdRouteImport } from './routes/juz.$id'
 import { Route as StoriesCategoryRouteImport } from './routes/stories.$category'
 import { Route as SurahIdRouteImport } from './routes/surah.$id'
@@ -43,6 +44,11 @@ const SearchRoute = SearchRouteImport.update({
   path: '/search',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SettingsRoute = SettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const JuzIdRoute = JuzIdRouteImport.update({
   id: '/juz/$id',
   path: '/juz/$id',
@@ -65,6 +71,7 @@ export interface FileRoutesByFullPath {
   '/daily': typeof DailyRoute
   '/quran': typeof QuranRoute
   '/search': typeof SearchRoute
+  '/settings': typeof SettingsRoute
   '/juz/$id': typeof JuzIdRoute
   '/stories/$category': typeof StoriesCategoryRoute
   '/surah/$id': typeof SurahIdRoute
@@ -75,6 +82,7 @@ export interface FileRoutesByTo {
   '/daily': typeof DailyRoute
   '/quran': typeof QuranRoute
   '/search': typeof SearchRoute
+  '/settings': typeof SettingsRoute
   '/juz/$id': typeof JuzIdRoute
   '/stories/$category': typeof StoriesCategoryRoute
   '/surah/$id': typeof SurahIdRoute
@@ -86,6 +94,7 @@ export interface FileRoutesById {
   '/daily': typeof DailyRoute
   '/quran': typeof QuranRoute
   '/search': typeof SearchRoute
+  '/settings': typeof SettingsRoute
   '/juz/$id': typeof JuzIdRoute
   '/stories/$category': typeof StoriesCategoryRoute
   '/surah/$id': typeof SurahIdRoute
@@ -98,6 +107,7 @@ export interface FileRouteTypes {
     | '/daily'
     | '/quran'
     | '/search'
+    | '/settings'
     | '/juz/$id'
     | '/stories/$category'
     | '/surah/$id'
@@ -108,6 +118,7 @@ export interface FileRouteTypes {
     | '/daily'
     | '/quran'
     | '/search'
+    | '/settings'
     | '/juz/$id'
     | '/stories/$category'
     | '/surah/$id'
@@ -118,6 +129,7 @@ export interface FileRouteTypes {
     | '/daily'
     | '/quran'
     | '/search'
+    | '/settings'
     | '/juz/$id'
     | '/stories/$category'
     | '/surah/$id'
@@ -129,6 +141,7 @@ export interface RootRouteChildren {
   DailyRoute: typeof DailyRoute
   QuranRoute: typeof QuranRoute
   SearchRoute: typeof SearchRoute
+  SettingsRoute: typeof SettingsRoute
   JuzIdRoute: typeof JuzIdRoute
   StoriesCategoryRoute: typeof StoriesCategoryRoute
   SurahIdRoute: typeof SurahIdRoute
@@ -171,6 +184,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SearchRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/settings': {
+      id: '/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof SettingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/juz/$id': {
       id: '/juz/$id'
       path: '/juz/$id'
@@ -201,6 +221,7 @@ const rootRouteChildren: RootRouteChildren = {
   DailyRoute: DailyRoute,
   QuranRoute: QuranRoute,
   SearchRoute: SearchRoute,
+  SettingsRoute: SettingsRoute,
   JuzIdRoute: JuzIdRoute,
   StoriesCategoryRoute: StoriesCategoryRoute,
   SurahIdRoute: SurahIdRoute,
