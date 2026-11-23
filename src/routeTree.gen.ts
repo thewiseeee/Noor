@@ -10,33 +10,128 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as BookmarksRouteImport } from './routes/bookmarks'
+import { Route as DailyRouteImport } from './routes/daily'
+import { Route as QuranRouteImport } from './routes/quran'
+import { Route as SearchRouteImport } from './routes/search'
+import { Route as JuzIdRouteImport } from './routes/juz.$id'
+import { Route as StoriesCategoryRouteImport } from './routes/stories.$category'
+import { Route as SurahIdRouteImport } from './routes/surah.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BookmarksRoute = BookmarksRouteImport.update({
+  id: '/bookmarks',
+  path: '/bookmarks',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DailyRoute = DailyRouteImport.update({
+  id: '/daily',
+  path: '/daily',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const QuranRoute = QuranRouteImport.update({
+  id: '/quran',
+  path: '/quran',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SearchRoute = SearchRouteImport.update({
+  id: '/search',
+  path: '/search',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const JuzIdRoute = JuzIdRouteImport.update({
+  id: '/juz/$id',
+  path: '/juz/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StoriesCategoryRoute = StoriesCategoryRouteImport.update({
+  id: '/stories/$category',
+  path: '/stories/$category',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SurahIdRoute = SurahIdRouteImport.update({
+  id: '/surah/$id',
+  path: '/surah/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/bookmarks': typeof BookmarksRoute
+  '/daily': typeof DailyRoute
+  '/quran': typeof QuranRoute
+  '/search': typeof SearchRoute
+  '/juz/$id': typeof JuzIdRoute
+  '/stories/$category': typeof StoriesCategoryRoute
+  '/surah/$id': typeof SurahIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/bookmarks': typeof BookmarksRoute
+  '/daily': typeof DailyRoute
+  '/quran': typeof QuranRoute
+  '/search': typeof SearchRoute
+  '/juz/$id': typeof JuzIdRoute
+  '/stories/$category': typeof StoriesCategoryRoute
+  '/surah/$id': typeof SurahIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/bookmarks': typeof BookmarksRoute
+  '/daily': typeof DailyRoute
+  '/quran': typeof QuranRoute
+  '/search': typeof SearchRoute
+  '/juz/$id': typeof JuzIdRoute
+  '/stories/$category': typeof StoriesCategoryRoute
+  '/surah/$id': typeof SurahIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/bookmarks'
+    | '/daily'
+    | '/quran'
+    | '/search'
+    | '/juz/$id'
+    | '/stories/$category'
+    | '/surah/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/bookmarks'
+    | '/daily'
+    | '/quran'
+    | '/search'
+    | '/juz/$id'
+    | '/stories/$category'
+    | '/surah/$id'
+  id:
+    | '__root__'
+    | '/'
+    | '/bookmarks'
+    | '/daily'
+    | '/quran'
+    | '/search'
+    | '/juz/$id'
+    | '/stories/$category'
+    | '/surah/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  BookmarksRoute: typeof BookmarksRoute
+  DailyRoute: typeof DailyRoute
+  QuranRoute: typeof QuranRoute
+  SearchRoute: typeof SearchRoute
+  JuzIdRoute: typeof JuzIdRoute
+  StoriesCategoryRoute: typeof StoriesCategoryRoute
+  SurahIdRoute: typeof SurahIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +143,67 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/bookmarks': {
+      id: '/bookmarks'
+      path: '/bookmarks'
+      fullPath: '/bookmarks'
+      preLoaderRoute: typeof BookmarksRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/daily': {
+      id: '/daily'
+      path: '/daily'
+      fullPath: '/daily'
+      preLoaderRoute: typeof DailyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/quran': {
+      id: '/quran'
+      path: '/quran'
+      fullPath: '/quran'
+      preLoaderRoute: typeof QuranRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/search': {
+      id: '/search'
+      path: '/search'
+      fullPath: '/search'
+      preLoaderRoute: typeof SearchRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/juz/$id': {
+      id: '/juz/$id'
+      path: '/juz/$id'
+      fullPath: '/juz/$id'
+      preLoaderRoute: typeof JuzIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/stories/$category': {
+      id: '/stories/$category'
+      path: '/stories/$category'
+      fullPath: '/stories/$category'
+      preLoaderRoute: typeof StoriesCategoryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/surah/$id': {
+      id: '/surah/$id'
+      path: '/surah/$id'
+      fullPath: '/surah/$id'
+      preLoaderRoute: typeof SurahIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  BookmarksRoute: BookmarksRoute,
+  DailyRoute: DailyRoute,
+  QuranRoute: QuranRoute,
+  SearchRoute: SearchRoute,
+  JuzIdRoute: JuzIdRoute,
+  StoriesCategoryRoute: StoriesCategoryRoute,
+  SurahIdRoute: SurahIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

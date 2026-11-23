@@ -1,35 +1,35 @@
-/*
- * Tailwind v4 entry: config lives here, with no tailwind.config.js or PostCSS plugin.
- * - Keep every @import in this top block, above @theme and the rest of the file. Install an
- *   npm package before @importing its CSS. Never @import a remote URL (web fonts, CDN CSS): the
- *   build resolves @import from the filesystem. Load those with a <link> in the head() of
- *   src/routes/__root.tsx and name the family in a --font-* token in @theme inline below.
- */
 @import "tailwindcss" source(none);
 @source "../src";
 @import "tw-animate-css";
+@import "@fontsource-variable/fraunces";
+@import "@fontsource-variable/figtree";
+@import "@fontsource/amiri-quran/400.css";
+@import "@fontsource/amiri/400.css";
+@import "@fontsource/amiri/700.css";
+@import "@fontsource/scheherazade-new/400.css";
+@import "@fontsource/scheherazade-new/700.css";
+@import "@fontsource/noto-naskh-arabic/400.css";
+@import "@fontsource/noto-naskh-arabic/600.css";
+@import "@fontsource/lateef/400.css";
+@import "@fontsource/reem-kufi/400.css";
+@import "@fontsource/noto-nastaliq-urdu/400.css";
+@import "@fontsource/noto-sans-devanagari/400.css";
 
 @custom-variant dark (&:is(.dark *));
 
 /*
- * Design system definition.
- *
- * The design lives in this file: oklch color tokens on the shadcn variables
- * (--background, --foreground, --primary, --secondary, --muted, --accent, ...) plus
- * new tokens as needed, font tokens, and custom styles and animations.
- *
- * The @theme inline block maps CSS custom properties to Tailwind utility
- * classes (e.g. --color-primary -> bg-primary, text-primary).
- *
- * The :root and .dark blocks define the actual color values using oklch.
- * All colors MUST use oklch format.
- *
- * To add a new semantic color:
- * 1. Add the variable to :root (light value) and .dark (dark value)
- * 2. Register it in @theme inline as --color-<name>: var(--<name>)
+ * Noor design system: warm paper + deep jewel accent + gold.
+ * The accent hue is driven by --hue (set via [data-accent]) so every theme
+ * style recolours the whole app in light and dark mode.
  */
 
 @theme inline {
+  --font-sans: "Figtree Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Fraunces Variable", Georgia, serif;
+  --font-arabic: var(--arabic-font), "Amiri", serif;
+  --font-urdu: "Noto Nastaliq Urdu", "Noto Naskh Arabic", serif;
+  --font-hindi: "Noto Sans Devanagari", var(--font-sans);
+
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -45,18 +45,25 @@
   --color-popover-foreground: var(--popover-foreground);
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
+  --color-primary-soft: var(--primary-soft);
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
+  --color-gold: var(--gold);
+  --color-gold-soft: var(--gold-soft);
   --color-destructive: var(--destructive);
   --color-destructive-foreground: var(--destructive-foreground);
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
   --color-ring-offset-background: var(--background);
+  --color-story-foreground: var(--story-foreground);
+  --color-story-muted: var(--story-muted);
+  --color-story-glass: var(--story-glass);
+  --color-story-ink: var(--story-ink);
   --color-chart-1: var(--chart-1);
   --color-chart-2: var(--chart-2);
   --color-chart-3: var(--chart-3);
@@ -73,83 +80,206 @@
 }
 
 :root {
-  --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.129 0.042 264.695);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.129 0.042 264.695);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.129 0.042 264.695);
-  --primary: oklch(0.208 0.042 265.755);
-  --primary-foreground: oklch(0.984 0.003 247.858);
-  --secondary: oklch(0.968 0.007 247.896);
-  --secondary-foreground: oklch(0.208 0.042 265.755);
-  --muted: oklch(0.968 0.007 247.896);
-  --muted-foreground: oklch(0.554 0.046 257.417);
-  --accent: oklch(0.968 0.007 247.896);
-  --accent-foreground: oklch(0.208 0.042 265.755);
-  --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.984 0.003 247.858);
-  --border: oklch(0.929 0.013 255.508);
-  --input: oklch(0.929 0.013 255.508);
-  --ring: oklch(0.704 0.04 256.788);
+  --hue: 165;
+  --chroma: 0.09;
+  --arabic-font: "Amiri Quran";
+  --radius: 1rem;
+
+  --background: oklch(0.975 0.012 85);
+  --foreground: oklch(0.24 0.03 var(--hue));
+  --card: oklch(0.993 0.006 85);
+  --card-foreground: var(--foreground);
+  --popover: var(--card);
+  --popover-foreground: var(--foreground);
+  --primary: oklch(0.45 var(--chroma) var(--hue));
+  --primary-foreground: oklch(0.98 0.01 85);
+  --primary-soft: oklch(0.93 calc(var(--chroma) * 0.35) var(--hue));
+  --secondary: oklch(0.94 0.018 85);
+  --secondary-foreground: oklch(0.3 0.03 var(--hue));
+  --muted: oklch(0.945 0.014 85);
+  --muted-foreground: oklch(0.5 0.025 var(--hue));
+  --accent: oklch(0.92 0.03 var(--hue));
+  --accent-foreground: oklch(0.3 0.05 var(--hue));
+  --gold: oklch(0.72 0.12 78);
+  --gold-soft: oklch(0.93 0.05 85);
+  --destructive: oklch(0.577 0.2 27);
+  --destructive-foreground: oklch(0.98 0 0);
+  --border: oklch(0.9 0.018 85);
+  --input: oklch(0.9 0.018 85);
+  --ring: oklch(0.55 var(--chroma) var(--hue));
+
+  --story-foreground: oklch(0.98 0.01 85);
+  --story-muted: oklch(0.98 0.01 85 / 72%);
+  --story-glass: oklch(1 0 0 / 14%);
+  --story-ink: oklch(0.22 0.03 200);
+
+  --gradient-hero: radial-gradient(120% 120% at 100% 0%, oklch(0.55 var(--chroma) var(--hue)) 0%, oklch(0.36 var(--chroma) var(--hue)) 55%, oklch(0.26 calc(var(--chroma) * 0.8) var(--hue)) 100%);
+  --gradient-ring: conic-gradient(from 200deg, var(--gold), oklch(0.62 0.13 var(--hue)), oklch(0.7 0.14 30), var(--gold));
+  --shadow-soft: 0 1px 2px oklch(0.3 0.03 var(--hue) / 6%), 0 8px 24px -12px oklch(0.3 0.05 var(--hue) / 22%);
+  --shadow-glow: 0 18px 40px -18px oklch(0.4 var(--chroma) var(--hue) / 65%);
+  --pattern-color: oklch(1 0 0 / 7%);
+
+  --story-ayah: linear-gradient(160deg, oklch(0.42 0.09 165), oklch(0.24 0.06 200));
+  --story-hadith: linear-gradient(160deg, oklch(0.45 0.1 55), oklch(0.25 0.06 30));
+  --story-prophets: linear-gradient(160deg, oklch(0.42 0.1 250), oklch(0.22 0.07 270));
+  --story-life: linear-gradient(160deg, oklch(0.5 0.1 130), oklch(0.27 0.06 150));
+  --story-aqeedah: linear-gradient(160deg, oklch(0.4 0.08 300), oklch(0.22 0.05 280));
+  --story-fiqh: linear-gradient(160deg, oklch(0.45 0.09 215), oklch(0.24 0.06 230));
+  --story-qaida: linear-gradient(160deg, oklch(0.5 0.12 20), oklch(0.27 0.08 0));
+  --story-history: linear-gradient(160deg, oklch(0.5 0.09 85), oklch(0.28 0.05 60));
+
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
   --chart-4: oklch(0.828 0.189 84.429);
   --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.984 0.003 247.858);
-  --sidebar-foreground: oklch(0.129 0.042 264.695);
-  --sidebar-primary: oklch(0.208 0.042 265.755);
-  --sidebar-primary-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-accent: oklch(0.968 0.007 247.896);
-  --sidebar-accent-foreground: oklch(0.208 0.042 265.755);
-  --sidebar-border: oklch(0.929 0.013 255.508);
-  --sidebar-ring: oklch(0.704 0.04 256.788);
+  --sidebar: var(--card);
+  --sidebar-foreground: var(--foreground);
+  --sidebar-primary: var(--primary);
+  --sidebar-primary-foreground: var(--primary-foreground);
+  --sidebar-accent: var(--accent);
+  --sidebar-accent-foreground: var(--accent-foreground);
+  --sidebar-border: var(--border);
+  --sidebar-ring: var(--ring);
 }
 
 .dark {
-  --background: oklch(0.129 0.042 264.695);
-  --foreground: oklch(0.984 0.003 247.858);
-  --card: oklch(0.208 0.042 265.755);
-  --card-foreground: oklch(0.984 0.003 247.858);
-  --popover: oklch(0.208 0.042 265.755);
-  --popover-foreground: oklch(0.984 0.003 247.858);
-  --primary: oklch(0.929 0.013 255.508);
-  --primary-foreground: oklch(0.208 0.042 265.755);
-  --secondary: oklch(0.279 0.041 260.031);
-  --secondary-foreground: oklch(0.984 0.003 247.858);
-  --muted: oklch(0.279 0.041 260.031);
-  --muted-foreground: oklch(0.704 0.04 256.788);
-  --accent: oklch(0.279 0.041 260.031);
-  --accent-foreground: oklch(0.984 0.003 247.858);
-  --destructive: oklch(0.704 0.191 22.216);
-  --destructive-foreground: oklch(0.984 0.003 247.858);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.551 0.027 264.364);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.208 0.042 265.755);
-  --sidebar-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-accent: oklch(0.279 0.041 260.031);
-  --sidebar-accent-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.551 0.027 264.364);
+  --background: oklch(0.17 0.02 var(--hue));
+  --foreground: oklch(0.94 0.012 85);
+  --card: oklch(0.215 0.024 var(--hue));
+  --card-foreground: var(--foreground);
+  --popover: var(--card);
+  --primary: oklch(0.78 calc(var(--chroma) * 1.2) var(--hue));
+  --primary-foreground: oklch(0.18 0.03 var(--hue));
+  --primary-soft: oklch(0.28 calc(var(--chroma) * 0.6) var(--hue));
+  --secondary: oklch(0.25 0.022 var(--hue));
+  --secondary-foreground: oklch(0.92 0.012 85);
+  --muted: oklch(0.24 0.02 var(--hue));
+  --muted-foreground: oklch(0.7 0.02 var(--hue));
+  --accent: oklch(0.29 0.035 var(--hue));
+  --accent-foreground: oklch(0.94 0.012 85);
+  --gold: oklch(0.8 0.12 82);
+  --gold-soft: oklch(0.3 0.05 80);
+  --border: oklch(1 0 0 / 9%);
+  --input: oklch(1 0 0 / 13%);
+  --ring: oklch(0.7 var(--chroma) var(--hue));
+  --shadow-soft: 0 1px 2px oklch(0 0 0 / 30%), 0 10px 30px -14px oklch(0 0 0 / 60%);
+  --gradient-hero: radial-gradient(120% 120% at 100% 0%, oklch(0.42 var(--chroma) var(--hue)) 0%, oklch(0.27 calc(var(--chroma) * 0.8) var(--hue)) 60%, oklch(0.2 0.03 var(--hue)) 100%);
 }
+
+/* AMOLED: true black backgrounds in dark mode */
+.dark[data-amoled="true"] {
+  --background: oklch(0 0 0);
+  --card: oklch(0.15 0.012 var(--hue));
+  --muted: oklch(0.17 0.012 var(--hue));
+  --secondary: oklch(0.18 0.014 var(--hue));
+}
+
+/* Paper texture style for light mode */
+:root:not(.dark)[data-paper="sepia"] {
+  --background: oklch(0.94 0.035 80);
+  --card: oklch(0.965 0.03 82);
+  --muted: oklch(0.91 0.035 80);
+  --secondary: oklch(0.91 0.035 80);
+  --border: oklch(0.85 0.04 78);
+}
+
+/* Colour styles */
+[data-accent="emerald"] { --hue: 165; --chroma: 0.09; }
+[data-accent="ocean"] { --hue: 235; --chroma: 0.1; }
+[data-accent="rose"] { --hue: 10; --chroma: 0.11; }
+[data-accent="amber"] { --hue: 60; --chroma: 0.11; }
+[data-accent="violet"] { --hue: 295; --chroma: 0.1; }
+[data-accent="slate"] { --hue: 250; --chroma: 0.03; }
+
+/* Arabic font choices */
+[data-arabic-font="amiri-quran"] { --arabic-font: "Amiri Quran"; }
+[data-arabic-font="amiri"] { --arabic-font: "Amiri"; }
+[data-arabic-font="scheherazade"] { --arabic-font: "Scheherazade New"; }
+[data-arabic-font="naskh"] { --arabic-font: "Noto Naskh Arabic"; }
+[data-arabic-font="lateef"] { --arabic-font: "Lateef"; }
+[data-arabic-font="kufi"] { --arabic-font: "Reem Kufi"; }
 
 @layer base {
   * {
     border-color: var(--color-border);
   }
-
+  html {
+    -webkit-tap-highlight-color: transparent;
+  }
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    overscroll-behavior-y: none;
   }
+  h1, h2, h3 {
+    font-family: var(--font-display);
+    letter-spacing: -0.01em;
+  }
+}
+
+@utility font-display {
+  font-family: var(--font-display);
+}
+@utility font-arabic {
+  font-family: var(--font-arabic);
+  direction: rtl;
+  font-feature-settings: "calt", "liga";
+}
+@utility font-urdu {
+  font-family: var(--font-urdu);
+  direction: rtl;
+}
+@utility font-hindi {
+  font-family: var(--font-hindi);
+}
+@utility bg-hero {
+  background-image: var(--gradient-hero);
+}
+@utility bg-ring {
+  background-image: var(--gradient-ring);
+}
+@utility shadow-soft {
+  box-shadow: var(--shadow-soft);
+}
+@utility shadow-glow {
+  box-shadow: var(--shadow-glow);
+}
+@utility pattern-stars {
+  background-image:
+    radial-gradient(circle at 25% 25%, var(--pattern-color) 1.5px, transparent 2px),
+    radial-gradient(circle at 75% 75%, var(--pattern-color) 1.5px, transparent 2px);
+  background-size: 28px 28px;
+}
+@utility story-ayah { background-image: var(--story-ayah); }
+@utility story-hadith { background-image: var(--story-hadith); }
+@utility story-prophets { background-image: var(--story-prophets); }
+@utility story-life { background-image: var(--story-life); }
+@utility story-aqeedah { background-image: var(--story-aqeedah); }
+@utility story-fiqh { background-image: var(--story-fiqh); }
+@utility story-qaida { background-image: var(--story-qaida); }
+@utility story-history { background-image: var(--story-history); }
+@utility safe-top {
+  padding-top: max(env(safe-area-inset-top), 0px);
+}
+@utility safe-bottom {
+  padding-bottom: max(env(safe-area-inset-bottom), 0px);
+}
+@utility no-scrollbar {
+  scrollbar-width: none;
+  &::-webkit-scrollbar { display: none; }
+}
+
+@keyframes story-progress {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+@keyframes float-up {
+  0%, 100% { transform: translateY(0); opacity: 0.7; }
+  50% { transform: translateY(-6px); opacity: 1; }
+}
+@utility animate-float-up {
+  animation: float-up 1.8s ease-in-out infinite;
 }
